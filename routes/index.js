@@ -465,12 +465,16 @@ function setCompName(req) {
   req.socket.name = req.data.name;
 }
 
+function getCompNames(req) {
+
+}
+
 function getReceiverList(req) {
   var namespace = '/';
   var receiversRoom = 'receivers';
   var users = [];
 
-  for (var id in app.io.of(namespace).adapter.rooms[receiversRoom]) {
+  for (var id in app.io.of(namespace).adapter.rooms[receiversRoom].sockets) {
     users.push(app.io.of(namespace).adapter.nsp.connected[id]);
   }
 
@@ -480,10 +484,10 @@ function getReceiverList(req) {
 function getReceiversMinusThis(req) {
   var receivers = getReceiverList();
   var validReceivers = [];
-  console.log(receivers);
   for (var index in receivers) {
     var client = receivers[index];
-    if (client.name && client.name.length > 0) {
+    if (client.name && client.name.length > 0 &&
+        client.id && req.socket.id != client.id) {
       validReceivers.push({
         id: client.id,
         name: client.name,
@@ -491,7 +495,7 @@ function getReceiversMinusThis(req) {
     }
   }
 
-  req.socket.emit('recievers', {recievers: validReceivers});
+  req.socket.emit('receivers', {receivers: validReceivers});
 }
 
 // sync routes

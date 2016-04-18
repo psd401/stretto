@@ -228,6 +228,14 @@ socket.on('duration_update', function(data) {
   player.song_collection.where({_id: data._id})[0].attributes.duration = data.new_duration;
 });
 
+// when we receive the receivers
+socket.on('receivers', function(data) {
+  console.log(data);
+  $('#otherRemotePlaceholder').replaceWith(
+    render('#remotes_template', data)
+  );
+});
+
 // remote controll events
 var CommandMessenger = null;
 var CommandTemplate = 'Received command \'{{command}}\'.';

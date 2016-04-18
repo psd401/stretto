@@ -16,7 +16,7 @@
     "cookie-parser": "^1.4.0",
     "errorhandler": "^1.4.2",
     "express-http-proxy": "^0.3.0",
-    "express.oi": "0.0.19",
+    "express.oi": "0.0.20",
     "md5": "*",
     "mkdirp": "*",
     "mobile-detect": "^0.4.3",

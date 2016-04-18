@@ -59,5 +59,8 @@ SettingsBarView = Backbone.View.extend({
         },
       },
     });
+
+    // request a list of receivers from the server
+    socket.emit('get_receivers');
   },
 });
